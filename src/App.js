@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Seconds from './Hooks/Seconds';
 
 function App() {
+
+  const [ showTimer, setShowTimer ] = useState(false);
+
   return (
     <div className="App">
       <header className="App-header">
+        <h1>React Hooks</h1>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
+        <button onClick = { () => setShowTimer(!showTimer) }>
+          {
+            !showTimer
+            ? 'Enable timer'
+            : 'Disable timer'
+          }
+        </button>
+        {
+          !showTimer
+          ? (
+            <div className="alert alert-danger">
+              Off
+            </div>
+          )
+          : (
+            <div className="alert alert-success">
+                On! <Seconds/> seconds
+            </div>
+          )
+        }
       </header>
     </div>
   );
